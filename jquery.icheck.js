@@ -216,11 +216,23 @@
 
           // Keyup
           } else if (type == 'keyup' && node[_type] == _radio) {
-            !node[_checked] && on(self, _checked);
-
-          // Focus/blur
+              !node[_checked] && on(self, _checked);
+          } else if (type == 'keyup') {
+              if (key == 38 || key == 37) {
+                  var elem = $(this).parent().prevAll('div.icheckbox_minimal:first').find('input');
+                  if (elem.length) {
+                      elem.trigger('focus.i');
+                  }
+              }
+              else if (key == 40 || key == 39) {
+                  var elem = $(this).parent().nextAll('div.icheckbox_minimal:first').find('input');
+                  if (elem.length) {
+                      elem.trigger('focus.i')
+                  }
+              }
+              // Focus/blur
           } else if (/us|ur/.test(type)) {
-            parent[type == 'blur' ? _remove : _add](focusClass);
+              parent[type == 'blur' ? _remove : _add](focusClass);
           };
         });
 
